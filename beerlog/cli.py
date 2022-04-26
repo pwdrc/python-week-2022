@@ -8,6 +8,8 @@ from rich.console import Console
 
 main = typer.Typer(help="Beer Management Application")
 
+console = Console()
+
 @main.command("add")
 def add(
     name: str, 
@@ -29,7 +31,7 @@ def list_beers(style: Optional[str] = None):
     for header in headers:
         table.add_column(header, style="magenta")
     for beer in beers:
-        values = [str(getattr(beers, header)) for header in headers]
+        values = [str(getattr(beer, header)) for header in headers]
         table.add_row(*values)
     console.print(table)
 
