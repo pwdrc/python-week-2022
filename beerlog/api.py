@@ -1,7 +1,7 @@
 from typing import List
 from fastapi import FastAPI
 from beerlog.core import get_beers_from_database
-from serializers import BeerOut
+from beerlog.serializers import BeerOut, BeerIn
 from beerlog.database import get_session
 from beerlog.models import Beer
 
@@ -15,8 +15,8 @@ def list_beers():
     return beers
 
 
-@api.post("/beers/", responde_model=BeerOut)
-def add_beer(beer_in: BeerIn):
+@api.post("/beers/", response_model=BeerOut)
+async def add_beer(beer_in: BeerIn):
     beer = Beer(**beer_in.dict())
     with get_session() as session:
         session.add(beer)
