@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 class Beer(SQLModel, table=True):
-    id: Optional[int] = Field(primary_key=True, default=None,index=True)
+    id: Optional[int] = Field(primary_key=True, default=None, index=True)
     name: str
     style: str
     flavor: int
@@ -22,12 +22,6 @@ class Beer(SQLModel, table=True):
             raise RuntimeError(f"{field.name} must be between 1 and 10")
         return v
 
-    def calculate_rate(cls, v,values):
-        rate = mean(
-            [
-                values["flavor"], 
-                values["image"], 
-                values["cost"]
-            ]
-        )
+    def calculate_rate(cls, v, values):
+        rate = mean([values["flavor"], values["image"], values["cost"]])
         return int(rate)

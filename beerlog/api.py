@@ -22,4 +22,4 @@ async def add_beer(beer_in: BeerIn):
         session.add(beer)
         session.commit()
         session.refresh(beer)
-    return beer 
+    return beer
